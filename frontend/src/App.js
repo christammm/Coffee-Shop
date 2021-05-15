@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+//Set BrowserRouter alias as ReactRouter from react-router-dom
+import {BrowserRouter as ReactRouter, Route} from 'react-router-dom'; //Uses HTML history api, pushState, replaceState, 
+import { Container } from 'react-bootstrap'// Do destructure call to bring multiple elements
+import HomeScreen from './screens/HomeScreen'
+import ProductScreen from './screens/ProductScreen';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   
+    <ReactRouter>{/**React.Fragment short declaration */}
+      <Header/>
+        <main className="py-3"> {/**py-3 adds padding*/}
+          <Container>
+            <Route path="/" component={HomeScreen} exact/>
+            {/**Set a route for the product template. The path will be referred to as /product/:id meanign product/of any id */}
+            <Route path="/product/:id" component={ProductScreen} />
+          </Container>
+        </main>
+      <Footer/>
+    </ReactRouter>
   );
 }
 
