@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 //Theres no specfic order you need to import the components in.
 //First Import the Link from React-router-dom
 import {Link} from 'react-router-dom'
@@ -7,18 +7,30 @@ import {Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap'
 //We're also throwing in our rating system
 import Rating from '../components/Rating'
 //Lets also import the product listing from our products.js file
-import products from '../products'
-import Product from '../components/Product'
+//import products from '../products'
+import axios from 'axios';
 
 //Do a destructured match call to pull the property from our Link tag stored in App.js
 const ProductScreen = ({ match }) => {
+
+    const [product, setProduct] = useState({});
+
+    //Use effect on render show 
+    useEffect(()=>{
+        const fetchProduct = async ()=>{
+            const {data} = await axios.get(`/api/products/${match.params.id}`);
+            setProduct(data)
+        }
+        fetchProduct();
+    },[match]);
+
     //While we dont have any product feed from our express app yet,
     //Find the matching product within 'products' and store it const product.
-    const product = products.find((eachProduct)=> eachProduct._id === match.params.id); // We are able to do match.params.id because this was stated in our path params from our Link tag from App.js.. Remember path="/product/:id"? this is where we got this.
+    //const product = products.find((eachProduct)=> eachProduct._id === match.params.id); // We are able to do match.params.id because this was stated in our path params from our Link tag from App.js.. Remember path="/product/:id"? this is where we got this.
     //The final stored product will be placed in our product variable.
     //If we did /product/:test/ instead, we would do 'match.params.test'.
 
-    console.log(Product)
+    console.log(product)
 
 
     return (

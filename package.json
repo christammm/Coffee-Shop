@@ -1,0 +1,33 @@
+{
+  "name": "coffee_shop",
+  "version": "1.0.0",
+  "description": "a MERN app demonstrating competencies in React Redux, Node, Mongo, Express",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "start": "node backend/server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run server \" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christammm/Coffee-Shop.git"
+  },
+  "author": "Christopher Tam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christammm/Coffee-Shop/issues"
+  },
+  "homepage": "https://github.com/christammm/Coffee-Shop#readme",
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.1.0",
+    "nodeman": "^1.1.2",
+    "nodemon": "^2.0.7"
+  }
+}

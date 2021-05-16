@@ -1,9 +1,26 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Col, Row } from 'react-bootstrap';
-import products from '../products';
+//import products from '../products';
 import Product from '../components/Product';
+import axios from 'axios';
+//Products as component level state
+
+//Carts, Product, are global redux state
 
 const HomeScreen = () => {
+    const [products, setProducts] = useState([])
+
+    //On first render pull all products
+    useEffect(()=>{
+        const fetchProducts = async () => {
+            const {data} = await axios.get('/api/products')
+            setProducts(data)
+        };
+
+        fetchProducts();
+    },[])
+    
+    
     //loop through each product within products as a separate product component
     return (
         <>

@@ -9,7 +9,9 @@ const Header = () => {
         <header>
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
-        <Navbar.Brand to="/">Coffee Shop</Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand to="/">Coffee Shop</Navbar.Brand>
+          </LinkContainer>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
