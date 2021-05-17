@@ -1,31 +1,36 @@
 //Declare express 
 import express from 'express'
-import dotenv from 'dotenv' //Declare dotenv
+import dotenv from 'dotenv' //Declare dotenv\
+import colors from 'colors'
+import {notFound, errorHandler} from './middleware/errorMiddleware.js'
+
+//Import connectDB js
+import connectDB from './config/db.js';
 
 //products
-import products from './data/products.js';
+import productRoutes from './routes/productRoutes.js';
 
 dotenv.config();
+
+connectDB();
 
 //Declare express instance or app
 const app = express();
 
-//GET ROUTE
+//GET ROUTE for home screen
 app.get('/', (req, res)=>{
     res.send('API is running');
 });
 
-//THIS GET api products will send send products as a JSON 
-app.get('/api/products', (req, res)=>{
-    res.json(products);
-});
+//Now any reference to /api/products will now use the routes assigned from productRoutes.js
+app.use('/api/products',productRoutes);
 
-//THIS GET will send back individual product
-app.get('/api/products/:id', (req, res)=>{
-    //Similar to the ES6 react method, we use products.find but instead of match we use req.
-    const product = products.find(product=>product._id === req.params.id);
-    res.json(product);
-});
+
+//Error handling middleware
+//404 error
+app.use(notFound)
+//Have err front of the params first to detect error for 500 Error.
+app.use(errorHandler)
 
 //DOT ENV ABOVE app.listen use PORT, else use PORT 5000
 const PORT = process.env.PORT || 5000;
@@ -33,5 +38,5 @@ const PORT = process.env.PORT || 5000;
 
 //listen on app
 //THe app listen is now using the varibles we declare in dotenv and .env
-app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode. Now listening on Port ${PORT}`));
+app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode. Now listening on Port ${PORT}`.green.bold));
 

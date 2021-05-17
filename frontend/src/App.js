@@ -6,6 +6,7 @@ import {BrowserRouter as ReactRouter, Route} from 'react-router-dom'; //Uses HTM
 import { Container } from 'react-bootstrap'// Do destructure call to bring multiple elements
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" component={HomeScreen} exact/>
             {/**Set a route for the product template. The path will be referred to as /product/:id meanign product/of any id */}
             <Route path="/product/:id" component={ProductScreen} />
+            <Route path="/cart" component={CartScreen}/>
           </Container>
         </main>
       <Footer/>
